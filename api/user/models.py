@@ -27,7 +27,7 @@ class UserManager(auth_models.BaseUserManager):
             last_name=last_name,
             email=email,
             password=password,
-            is_staff=True
+            is_staff=True,
             is_superuser=True
         )
         user.save()
@@ -40,9 +40,11 @@ class UserManager(auth_models.BaseUserManager):
 class User(auth_models.AbstractUser):
     first_name = models.CharField(verbose_name="First Name", max_length=100)
     last_name = models.CharField(verbose_name="Last Name", max_length=100)
-    email = models.CharField(verbose_name="email", max_length=255)
+    email = models.CharField(verbose_name="email", max_length=255, unique=True)
     password = models.CharField(verbose_name="password", max_length=255)
     username = None
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
