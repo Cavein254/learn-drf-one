@@ -45,5 +45,7 @@ class User(auth_models.AbstractBaseUser):
     password = models.CharField(max_length=255)
     username = None
 
+    objects = UserManager
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
